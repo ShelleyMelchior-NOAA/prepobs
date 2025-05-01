@@ -1346,6 +1346,8 @@ fi
 #-------------------------------------------------------------------------------
 # Loop until guess is found.
 fh=$fhbeg
+echo "fh: $fh"
+echo "fhend: $fhend"
 if [ -z "$PDY" ];then echo "getges.sh WARNING: \$PDY variable not set" >&2; fi
 while [[ $fh -le $fhend ]];do
  ((fhm6=10#$fh-6))
@@ -1377,8 +1379,11 @@ while [[ $fh -le $fhend ]];do
  ghp2=$fhp2;[[ $ghp2 -lt 100 ]]&&ghp2=0$ghp2
  ghp3=$fhp3;[[ $ghp3 -lt 100 ]]&&ghp3=0$ghp3
  id=$($NDATE -$fh $valid)
- typeset -L8 day=$id
- typeset -R2 cyc=$id
+ echo "typset: $id"
+# typeset -L8 day=$id
+ day=$(echo $id | cut -c1-8)
+# typeset -R2 cyc=$id
+ cyc=$(echo $id | cut -c9-10)
  eval list=\$getlist$fh
  [[ -z "$list" ]]&&list=${geslist}
  for ges_var in $list;do
