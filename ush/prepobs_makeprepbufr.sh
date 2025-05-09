@@ -1454,8 +1454,10 @@ echo "AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
                set -x
             else
                if [ "$sfx" = 'A' ]; then
-                 typeset -Z2 fhr
-                 fhr=`awk -F"sf" '{print$2}' sgesprep_pathname | cut -c1-2`
+                 #typeset -Z2 fhr                                              #ksh
+                 #fhr=`awk -F"sf" '{print$2}' sgesprep_pathname | cut -c1-2`   #ksh
+		 fhr=$(awk -F"sf" '{print $2}' sgesprep_pathname | cut -c1-2)  #bash
+		 fhr=$(printf "%02d" "$fhr")                                   #bash
                  fhr=`expr $fhr + 03`
                  dhr=`expr 3 - $modhr`
                fi
@@ -2186,8 +2188,10 @@ set -x
          elif [ "$launcher_PREP" = aprun ]; then
             ## Determine tasks per node (PREPDATAtpn) and
             ##    max number of concurrent procs (PREPDATAprocs) for cfp
-            typeset -i nodesall=$(echo -e "${LSB_HOSTS// /\\n}"|sort -u|wc -w)
-            typeset -i ncnodes=$(($nodesall-1)) # we want compute nodes only
+            #typeset -i nodesall=$(echo -e "${LSB_HOSTS// /\\n}"|sort -u|wc -w)  #ksh
+            #typeset -i ncnodes=$(($nodesall-1)) # we want compute nodes only    #ksh
+	    declare -i nodesall=$(tr ' ' '\n' <<< "$LSB_HOSTS"|sort -u|wc -l)    #bash
+	    delcare -i ncnodes=$((nodesall-1)) # we want compute nodes only      #bash
             if [ $ncnodes -lt 1 ]; then
                set +x
                echo
