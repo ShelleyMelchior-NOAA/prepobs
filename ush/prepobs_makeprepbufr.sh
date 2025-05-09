@@ -2191,7 +2191,7 @@ set -x
             #typeset -i nodesall=$(echo -e "${LSB_HOSTS// /\\n}"|sort -u|wc -w)  #ksh
             #typeset -i ncnodes=$(($nodesall-1)) # we want compute nodes only    #ksh
 	    declare -i nodesall=$(tr ' ' '\n' <<< "$LSB_HOSTS"|sort -u|wc -l)    #bash
-	    delcare -i ncnodes=$((nodesall-1)) # we want compute nodes only      #bash
+	    declare -i ncnodes=$((nodesall-1)) # we want compute nodes only      #bash
             if [ $ncnodes -lt 1 ]; then
                set +x
                echo
