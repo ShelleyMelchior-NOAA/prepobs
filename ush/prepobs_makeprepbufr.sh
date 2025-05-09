@@ -1921,7 +1921,7 @@ BUFRLIST_all="uprair aircar aircft satwnd proflr vadwnd rassda adpupa adpsfc \
  sfcshp sfcbog msonet spssmi erscat qkswnd wdsatr ascatw rtovs atovs goesnd \
  gpsipw"
 ###BUFRLIST_all_array=($BUFRLIST_all) # this does not work on all platforms
-#set -A BUFRLIST_all_array `echo $BUFRLIST_all` # this works on all platforms; ksh
+#set -A BUFRLIST_all_array `echo $BUFRLIST_all` # this works on all platforms; #ksh
 BUFRLIST_all_array=($BUFRLIST_all)        # bash
 
 # Any dump file not included in BUFRLIST is "touched" so that it will not
